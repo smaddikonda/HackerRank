@@ -1,0 +1,36 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int a0 = in.nextInt();
+        int a1 = in.nextInt();
+        int a2 = in.nextInt();
+        int b0 = in.nextInt();
+        int b1 = in.nextInt();
+        int b2 = in.nextInt();
+       
+        int A[] = {a0, a1, a2};
+        int B[] = {b0, b1, b2};
+        int sumA = 0;
+        int sumB = 0;
+        
+        for(int i=0; i<3; i++) {
+            if(A[i]<1 || A[i]>100 || B[i]<1 || B[i]>100){
+                System.exit(0);
+            } else if(A[i]>B[i]) {
+                sumA++;
+            } else if(A[i]<B[i]) {
+                sumB++;
+            }
+        }
+        
+        System.out.print(sumA + " ");
+        System.out.print(sumB);
+    }
+}

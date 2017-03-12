@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+public class Array2D {
+
+	public static int[][] matrix = new int[6][6];
+	public static int[] hourglassSumArray = new int[16];
+
+	public static void main(String args[]) {
+		boolean result = scanInputs();
+		if (!result) {
+			System.exit(0);
+		}
+		performHourglassSum();
+		System.out.println(returnMax());
+	}
+
+	private static int returnMax() {
+		int max = Integer.MIN_VALUE;
+		for (int i = 0; i < hourglassSumArray.length; i++) {
+			if(hourglassSumArray[i] > max){
+				max = hourglassSumArray[i];
+			}
+		}
+		return max;
+	}
+
+	private static void performHourglassSum() {
+		int count = 0;
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				int topSum = matrix[i][j] + matrix[i][j + 1] + matrix[i][j + 2];
+				int bottomSum = matrix[i + 2][j] + matrix[i + 2][j + 1]
+						+ matrix[i + 2][j + 2];
+				int centre = matrix[i + 1][j + 1];
+				int sum = topSum + bottomSum + centre;
+				hourglassSumArray[count] = sum;
+				count++;
+			}
+		}
+	}
+
+	private static boolean scanInputs() {
+		Scanner sc = new Scanner(System.in);
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 6; j++) {
+				int temp = sc.nextInt();
+				if (temp < -9 || temp > 9) {
+					return false;
+				}
+				matrix[i][j] = temp;
+			}
+		}
+		return true;
+	}
+}

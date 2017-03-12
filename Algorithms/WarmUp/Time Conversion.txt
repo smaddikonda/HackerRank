@@ -1,0 +1,37 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String time = in.next();
+        
+        String mode = time.substring(8,9);
+        String hh = time.substring(0,2);
+        String mm = time.substring(3,5);
+        String ss = time.substring(6,8);
+        
+        int h = Integer.parseInt(hh);
+        if("P".equals(mode) || "p".equals(mode)) {            
+            if(h==12){
+                hh = h + "";
+            } else {
+                hh = 12 + h + "";
+            }
+        } else {
+            if(h==12) {
+                hh = "00";
+            } else if(h<10){
+                hh = "0" + h;
+            } else {
+                hh = h + "";
+            }
+        }
+        
+        System.out.println(hh + ":" + mm + ":" + ss);
+    }
+}

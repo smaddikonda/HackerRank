@@ -1,0 +1,44 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int[] h = new int[26];
+        for(int i=0; i < 26; i++){
+            h[i] = in.nextInt();
+        }
+        
+        String word = in.next();
+        int width = word.length();
+        int height[] = new int[width];
+        
+        for(int i=0; i<width; i++) {
+            String l;
+            l = word.substring(i, i+1);
+            if (i == width-1){
+                l = word.substring(i);
+            }
+            char ch = l.charAt(0);
+            int ascii = (int) ch;
+            height[i] = h[ascii-97];            
+        }
+        
+        for(int i=0; i<height.length; i++) {
+            for (int j=i; j<height.length; j++){
+                if(height[i]>height[j]){
+                    int temp = height[j];
+                    height[j] = height[i];
+                    height[i] = temp;
+                }
+            }
+        }
+        
+        int maxHeight = height[height.length-1];
+        System.out.println(maxHeight*width);
+    }
+}

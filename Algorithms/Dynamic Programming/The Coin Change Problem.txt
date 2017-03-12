@@ -1,0 +1,55 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int C[] = new int[M];
+        for(int i=0; i<M; i++) {
+            C[i] = sc.nextInt();
+        }
+        
+        //Create a Memoization table of size [M+1][N+1]
+        long table[][] = new long[M+1][N+1];
+        
+        for(int i=0; i<M+1; i++){
+            for(int j=0; j<N+1; j++){
+                //i==0 means there are no coins.
+                //The number of ways of making any Sum without any coins is 0;
+                if(i==0){
+                    table[i][j]=0;
+                }
+                
+                //j==0 means the sum is 0.
+                //The number of ways of making sum=0 with any coin denomination is 1,
+                //since we need to include 0 coins of each denomination.
+                if(j==0){
+                    table[i][j]=1;
+                }
+                
+                //If the coin we are dealing with is greater than the sum we are dealing with,
+                //we simply exclude the coin and continue.
+                if(i>=1 && C[i-1]>j){
+                    table[i][j] = table[i-1][j];
+                }
+                
+                //If the coin we are dealing with less than or equal to the sum we are dealing with,
+                //we have the choice to either include or exclude the coin.
+                //Hence we sum the outcomes from both the cases.
+                else if (i>=1 && C[i-1] <= j){
+                    table[i][j] = table[i-1][j] + table[i][j-C[i-1]];
+                }
+            }            
+        }
+        
+        System.out.println(table[M][N]);
+        
+        
+    }
+}

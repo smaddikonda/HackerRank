@@ -1,0 +1,35 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int lo = sc.nextInt();
+        int hi = sc.nextInt();
+        int k = sc.nextInt();
+        int count = 0;
+        
+        Solution s = new Solution();        
+        
+        for(int i=lo; i<hi; i++){
+            if((Math.abs(i-s.reversed(i))%k) == 0){
+                count++;
+            }
+        }
+        System.out.println(count);
+    }
+    
+    public int reversed(int n){
+        int sum = 0;
+        while(n!=0){
+            int dig = n%10;
+            sum = sum * 10 + dig;
+            n/=10;
+        }
+        return sum;
+    }
+}
